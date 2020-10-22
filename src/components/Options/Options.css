@@ -1,0 +1,28 @@
+.divOption {
+    display: grid;
+}
+
+.options {
+    width: 32.5rem;
+    background-color: #c4e8f2;
+    padding: 10px;
+    border-left: 3px black solid;
+    margin-top: 8px;
+}
+
+.options:hover {
+    transform: scale(1.05);
+}
+
+ul {
+    display: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:active {
+    background-color: blue;
+}

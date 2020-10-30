@@ -10,6 +10,33 @@
     margin-top: 8px;
 }
 
+.optionblue {
+    width: 32.5rem;
+    padding: 10px;
+    border-left: 3px black solid;
+    margin-top: 8px;
+    background-color: blue;
+    color: white;
+}
+
+.optiongreen {
+    width: 32.5rem;
+    padding: 10px;
+    border-left: 3px black solid;
+    margin-top: 8px;
+    background-color: green;
+    color: white;
+}
+
+.optionred {
+    width: 32.5rem;
+    padding: 10px;
+    border-left: 3px black solid;
+    margin-top: 8px;
+    background-color: red;
+    color: white;
+}
+
 .options:hover {
     transform: scale(1.05);
 }

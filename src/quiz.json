@@ -1,0 +1,17 @@
+{
+    "QuizQuestions": [{
+            "id": 1,
+            "Author": "Joseph Conrad",
+            "options": "Maceth,The Shining,Heart of Darkness,Hamlet"
+        },
+        {
+            "id": 2,
+            "Author": "JKRowling",
+            "options": "Maceth,The Shining,Heart of Darkness,The Cuckoo's Calling"
+        }
+    ],
+    "QuizAnswer": {
+        "1": "Heart of Darkness",
+        "2": "The Cuckoo's Calling"
+    }
+}

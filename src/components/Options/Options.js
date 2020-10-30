@@ -1,44 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Options.css';
 
-function Options(){
-    
-    let currentSelectedOption = 0;
-    let [selectedOption, setSelectedOption] = useState();
+function Options(props) {
 
-    function OnClickOption(event){
-        
-        //console.log(event.target.getAttribute("data"));
-        if(currentSelectedOption === 0){
-            currentSelectedOption = parseInt(event.target.getAttribute("data"));
-            event.target.style.background = "blue";
-        }else if(currentSelectedOption === parseInt(event.target.getAttribute("data"))){
-            document.getElementsByClassName("option"+event.target.getAttribute("data"))[0].style.backgroundColor = "#c4e8f2";
-            currentSelectedOption = parseInt(0);
-        }
-        else{
-            //console.log("option"+currentSelectedOption);
-            document.getElementsByClassName("option"+currentSelectedOption)[0].style.backgroundColor = "#c4e8f2";
-            currentSelectedOption = parseInt(event.target.getAttribute("data"));
-            event.target.style.background = "blue";
-        }
-        
-        // setSelectedOption(currentSelectedOption);
-        // selectedOption = currentSelectedOption;
-        // console.log("From Option : "+selectedOption)
+    let [isSelectedOption, setIsSelectedOption] = useState("");
+    let [toggleCheck, setToggleCheck] = useState("");
+    let [SelectedOptionQuizId, setSelectedOptionQuizId] = useState("");
+    let [answerList, setAnswerList] = useState([]);
 
+    const answerDbUrl = "http://localhost:9000/QuizAnswer";
+
+    function loadAnswers(){
+        axios.get(answerDbUrl)
+            .then(function(response) {
+                  setAnswerList(response.data);
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+      }
+
+    // useEffect(loadAnswers)  /// everytime component gets rederned
+    useEffect(loadAnswers, []) // invoke only once
+    // useEffect(loadAnswers, [ isSelectedOption ])// invoke everytime isSelectedOption gets updated
+
+    const selectOption = (element, Id) => {
+        setToggleCheck("")
+        if (isSelectedOption === element) {
+            setIsSelectedOption("")
+            setSelectedOptionQuizId("")
+        } else {
+            setIsSelectedOption(element)
+            setSelectedOptionQuizId(Id)
+        }
     }
 
-    return(
+    const checkAnswer = () => {
+        if(answerList[SelectedOptionQuizId] === isSelectedOption.trimStart()){
+            setToggleCheck(true);
+        }else{
+            setToggleCheck(false);
+        }
+    }
+
+
+    const getClassName = (element) => {
+        if (element === isSelectedOption) {
+            if(toggleCheck === true){
+                return "optiongreen"
+            }else if(toggleCheck === false){
+                return "optionred"
+            }else{
+                return "optionblue"
+            }
+        }
+        else {
+            return "options";
+        }
+    }
+
+    return (
         <div className="divOption">
 
             <ul>
-                <a href="#!" onClick={OnClickOption} data="1" className="options option1">Maceth</a>
-                <a href="#!" onClick={OnClickOption} data="2" className="options option2">The Shining</a>
-                <a href="#!" onClick={OnClickOption} data="3" className="options option3">Heart of Darkness</a>
-                <a href="#!" onClick={OnClickOption} data="4" className="options option4">Hamlet</a>
+                {
+                    props.option.map((element) => {
+                        return <a href="#!" key={element} onClick={() => selectOption(element, props.quizId)} className={getClassName(element)}>{element}</a>
+                    })
+                }
+                {<p><input type="submit" className="author checkAnswerButton" onClick={() => checkAnswer()} value="Check Answer" /></p>}
             </ul>
-            
         </div>
     )
 }

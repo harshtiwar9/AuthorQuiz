@@ -1,10 +1,10 @@
 import React from 'react';
 import './Author.css';
 
-function Author(){
+function Author(props){
     return(
         <div className="author">
-            <h2>Joseph Conrad</h2>
+            <h2>{props.authorName}</h2>
         </div>
     )
 }

@@ -21,7 +21,7 @@ function Options(props) {
             })
       }
 
-    // useEffect(loadAnswers)  /// everytime component gets rederned
+    // useEffect(loadAnswers)  /// everytime component gets rendered
     useEffect(loadAnswers, []) // invoke only once
     // useEffect(loadAnswers, [ isSelectedOption ])// invoke everytime isSelectedOption gets updated
 

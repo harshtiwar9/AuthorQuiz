@@ -17,7 +17,6 @@ function App() {
     axios.get(questionDbUrl)
         .then(function(response) {
               setQuizList(response.data);
-              return <div>Hello World!</div>
         })
         .catch(function(error){
             console.log(error);
